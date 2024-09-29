@@ -18,11 +18,13 @@ struct ContentView: View {
                             Text("Row #\(index)")
                                 .font(.title)
                                 .frame(maxWidth: .infinity)
-                                .background(colors[index % 7])
+                                .background(Color(hue: min((proxy.frame(in: .global).minY / (fullView.size.height * 20)) + 0.1, 1.0),
+                                                  saturation: ((2/pow(fullView.size.height, 2))*pow(proxy.frame(in: .global).minY, 2)) - ((2/fullView.size.height)*proxy.frame(in: .global).minY) + 1.0,
+                                                  brightness: 1))
                                 .rotation3DEffect(.degrees(proxy.frame(in: .global).minY - fullView.size.height / 2) / 5, axis: (x: 0, y: 1, z: 0))
                                 .opacity(proxy.frame(in: .global).minY / 200)
                                 .scaleEffect(max(0.000651 * proxy.frame(in: .global).maxY + 0.434, 0.5))
-                        }
+                    }
                     .frame(height: 40)
                 }
             }
